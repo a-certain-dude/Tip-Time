@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +22,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -182,12 +182,13 @@ fun RoundTheTipRow(
 }
 
 // calculatorTip function made use of the three composable to calculate the tip
-private fun calculateTip(amount: Double, tipPercent: Double, switchButton: Boolean): String {
+@VisibleForTesting
+internal fun calculateTip(amount: Double, tipPercent: Double, switchButton: Boolean): String {
     var tip = tipPercent / 100 * amount
     if (switchButton) {
         tip = ceil(tip)
     }
-    return NumberFormat.getCurrencyInstance().format(tip)
+return NumberFormat.getCurrencyInstance().format(tip)
 }
 
 @Preview(showBackground = true, showSystemUi = true)
